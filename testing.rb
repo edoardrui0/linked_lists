@@ -1,13 +1,13 @@
 require_relative 'main'
 
-list = LinkedList.new
+list = LinkedList.new('dolphin')
 
 list.append('dog')
 list.append('cat')
 list.append('parrot')
 list.append('hamster')
+list.pop
 list.append('snake')
-list.prepend('turtle')
-p list.find('snake')
-
-# p list.list
+list.append('turtle')
+list.prepend('alpaca')
+list.to_s

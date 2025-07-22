@@ -54,28 +54,51 @@ class LinkedList
   end
 
   def pop # removes the last element from the list
-    #left off here 7/21
     current_node = @head
-    while current_node.next_node != nil
+    if current_node.next_node.nil?
+      @head = @head.next_node
+    else 
+      current_node = current_node.next_node until current_node.next_node.next_node.nil?
+      current_node.next_node = nil
+    end
+  end
+
+  def contains?(value) # returns true if the passed in value is in the list and otherwise returns false.
+    current_node = @head
+    until current_node.nil?
+      return true if current_node.value == value
       current_node = current_node.next_node
     end
-    current_node.next_node
+
+    false
   end
 
-  def print_list
+  def find(value) # returns the index of the node containing value, or nil if not found.
+    index = 0
     current_node = @head
-    p current_node.value
-    while (current_node = current_node.next_node)
-      p current_node.value
+    until current_node.nil?
+      return index if current_node.value == value
+      current_node = current_node.next_node
+      index += 1
     end
+    nil
   end
+
+  def to_s # represent your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> nil
+    current_node = @head
+    list = ''
+    while current_node
+      list << "( #{current_node.value} ) -> "
+      current_node = current_node.next_node
+    end
+    puts list << " nil"
+  end
+
+  # def print_list
+  #   current_node = @head
+  #   while current_node
+  #     p current_node.value
+  #     current_node = current_node.next_node
+  #   end
+  # end
 end
-
-list = LinkedList.new(2)
-
-list.append(3)
-list.append(7)
-list.prepend(8)
-list.append(10)
-list.pop
-list.print_list
